@@ -1,0 +1,222 @@
+object Form1: TForm1
+  Left = 386
+  Height = 316
+  Top = 149
+  Width = 568
+  Caption = 'Contas a Pagar e a Receber'
+  ClientHeight = 316
+  ClientWidth = 568
+  OnCreate = FormCreate
+  LCLVersion = '5.7'
+  object DBNavigator1: TDBNavigator
+    AnchorSideLeft.Control = Owner
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 8
+    Height = 25
+    Top = 283
+    Width = 241
+    Anchors = [akLeft, akBottom]
+    BeforeAction = DBNavigator1BeforeAction
+    BevelOuter = bvNone
+    BorderSpacing.Left = 8
+    BorderSpacing.Bottom = 8
+    ChildSizing.EnlargeHorizontal = crsScaleChilds
+    ChildSizing.EnlargeVertical = crsScaleChilds
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 100
+    ClientHeight = 25
+    ClientWidth = 241
+    DataSource = ds_contas
+    Options = []
+    TabOrder = 0
+  end
+  object DBGrid1: TDBGrid
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = DBNavigator1
+    Left = 8
+    Height = 267
+    Top = 8
+    Width = 552
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
+    Color = clWindow
+    Columns = <    
+      item
+        Title.Caption = 'id'
+        FieldName = 'id'
+      end    
+      item
+        Title.Caption = 'nome'
+        FieldName = 'nome'
+      end    
+      item
+        Title.Caption = 'valor'
+        FieldName = 'valor'
+      end    
+      item
+        Title.Caption = 'vencimento'
+        FieldName = 'vencimento'
+      end    
+      item
+        PickList.Strings = (
+          'Entrada'
+          'Saida'
+        )
+        Title.Caption = 'tipo'
+        FieldName = 'tipo'
+      end    
+      item
+        Title.Caption = 'pago'
+        FieldName = 'pago'
+      end>
+    DataSource = ds_contas
+    TabOrder = 1
+  end
+  object lblEntrada: TLabel
+    AnchorSideTop.Control = DBNavigator1
+    Left = 277
+    Height = 13
+    Top = 284
+    Width = 47
+    BorderSpacing.Top = 1
+    Caption = 'ENTRADA'
+    ParentColor = False
+  end
+  object lblSaida: TLabel
+    AnchorSideTop.Control = lblEntrada
+    AnchorSideTop.Side = asrBottom
+    Left = 277
+    Height = 13
+    Top = 298
+    Width = 31
+    BorderSpacing.Top = 1
+    Caption = 'SAIDA'
+    ParentColor = False
+  end
+  object lblPagarVencido: TLabel
+    AnchorSideTop.Control = lblReceberVencido
+    AnchorSideTop.Side = asrBottom
+    Left = 363
+    Height = 13
+    Top = 300
+    Width = 82
+    BorderSpacing.Top = 3
+    Caption = 'PAGAR VENCIDO'
+    ParentColor = False
+  end
+  object lblReceberVencido: TLabel
+    AnchorSideTop.Control = DBNavigator1
+    Left = 363
+    Height = 13
+    Top = 284
+    Width = 93
+    BorderSpacing.Top = 1
+    Caption = 'RECEBER VENCIDO'
+    ParentColor = False
+  end
+  object ZConnection1: TZConnection
+    ControlsCodePage = cCP_UTF8
+    AutoEncodeStrings = False
+    Properties.Strings = (
+      'AutoEncodeStrings='
+    )
+    Connected = True
+    DesignConnection = True
+    Port = 0
+    Database = 'banco.sqlite'
+    Protocol = 'sqlite-3'
+    left = 344
+    top = 225
+  end
+  object table_contas: TZTable
+    Connection = ZConnection1
+    Active = True
+    TableName = 'contas'
+    left = 344
+    top = 168
+    object table_contasid: TLargeintField
+      FieldKind = fkData
+      FieldName = 'id'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      OnChange = table_contasidChange
+    end
+    object table_contasvalor: TFloatField
+      FieldKind = fkData
+      FieldName = 'valor'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Currency = True
+      MaxValue = 0
+      MinValue = 0
+      Precision = 2
+    end
+    object table_contasvencimento: TDateField
+      FieldKind = fkData
+      FieldName = 'vencimento'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      EditMask = '##/##/####'
+    end
+    object table_contasnome1: TStringField
+      FieldKind = fkData
+      FieldName = 'nome'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object table_contastipo1: TStringField
+      FieldKind = fkData
+      FieldName = 'tipo'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object able_contaspago1: TBooleanField
+      DefaultExpression = '0'
+      FieldKind = fkData
+      FieldName = 'pago'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = '1;0'
+    end
+  end
+  object ds_contas: TDataSource
+    DataSet = table_contas
+    left = 344
+    top = 112
+  end
+  object ZSQLMonitor1: TZSQLMonitor
+    Active = True
+    AutoSave = True
+    FileName = 'C:\Users\Administrator\Desktop\contas\log.txt'
+    MaxTraceCount = 100
+    left = 455
+    top = 177
+  end
+end

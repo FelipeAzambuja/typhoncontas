@@ -1,0 +1,7 @@
+2016-08-19 01:11:06 cat: Connect, proto: sqlite-3, msg: CONNECT TO "banco.sqlite" AS USER ""
+2016-08-19 01:11:06 cat: Prepare, proto: sqlite-3, msg: Statement 1 : SELECT * FROM contas
+
+2016-08-19 01:11:06 cat: Prepare, proto: sqlite-3, msg: Statement 2 : PRAGMA table_info('contas')
+2016-08-19 01:11:06 cat: Execute prepared, proto: sqlite-3, msg: Statement 2
+2016-08-19 01:11:06 cat: Execute prepared, proto: sqlite-3, msg: Statement 1
+2016-08-19 01:11:15 cat: Execute prepared, proto: sqlite-3, msg: Statement 1
